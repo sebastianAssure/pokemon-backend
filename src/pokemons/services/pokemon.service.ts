@@ -141,4 +141,31 @@ export class PokemonService {
             throw error;
         }
     }
+
+    public async levelUp(id: string) {
+        try {
+          const pokemon = await this.findOne(id);
+      
+          if (!pokemon.trainer) {
+            throw new BadRequestException(`Pokemon with id ${id} is wild and cannot level up.`);
+          }
+      
+          if (pokemon.level >= 100) {
+            throw new BadRequestException(`Pokemon with id ${id} is already at max level.`);
+          }
+      
+          pokemon.level += 1;
+      
+          await this.pokemonRepository.save(pokemon);
+      
+          return {
+            message: `Pokemon with id ${id} leveled up to ${pokemon.level}.`,
+            level: pokemon.level
+          };
+        } catch (error) {
+          handlerError(error, this.logger);
+          throw error;
+        }
+      }
+      
 }

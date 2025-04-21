@@ -6,7 +6,7 @@ import { CapturePokemonDto } from '../dto/capture-pokemon.dto';
 
 @Controller('pokemons')
 export class PokemonController {
-    constructor(private readonly pokemonService: PokemonService) {}
+    constructor(private readonly pokemonService: PokemonService) { }
 
     @Post()
     create(@Body() createPokemonDto: CreatePokemonDto) {
@@ -33,15 +33,21 @@ export class PokemonController {
         return this.pokemonService.remove(id);
     }
 
-    @Post(':id/capture')
+    @Patch(':id/capture')
     @HttpCode(200)
     capture(@Param('id', ParseUUIDPipe) id: string, @Body() capturePokemonDto: CapturePokemonDto) {
         return this.pokemonService.capture(id, capturePokemonDto);
     }
 
-    @Post(':id/release')
+    @Patch(':id/release')
     @HttpCode(200)
     release(@Param('id', ParseUUIDPipe) id: string) {
         return this.pokemonService.release(id);
+    }
+
+    @Patch(':id/level-up')
+    @HttpCode(200)
+    levelUp(@Param('id') id: string) {
+        return this.pokemonService.levelUp(id);
     }
 }
