@@ -11,6 +11,7 @@ import { TrainerEntity } from './entities/trainer.entity';
     TypeOrmModule.forFeature([
       TrainerEntity
     ])
-  ]
+  ],
+  exports: [TrainersService]
 })
 export class TrainersModule {}

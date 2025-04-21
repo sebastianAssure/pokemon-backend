@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/common/entities/base.entity';
-import { Check, Column, Entity } from 'typeorm';
+import { PokemonEntity } from 'src/pokemons/entities/pokemon.entity';
+import { Check, Column, Entity, OneToMany } from 'typeorm';
 
 @Check(`"age" >= 10 AND "age" <= 120`)
 @Entity({ name: 'trainers' })
@@ -7,7 +8,7 @@ export class TrainerEntity extends BaseEntity {
     @Column({ type: 'varchar', nullable: false })
     name: string;
 
-    @Column({ type: 'varchar', nullable: false })
+    @Column({ type: 'varchar', name: 'second_name', nullable: false })
     secondName: string;
 
     @Column({ type: 'int' })
@@ -18,4 +19,7 @@ export class TrainerEntity extends BaseEntity {
 
     @Column({ type: 'int' })
     badges: number;
+
+    @OneToMany(() => PokemonEntity, (pokemon) => pokemon.trainer)
+    pokemons: PokemonEntity[];
 }
