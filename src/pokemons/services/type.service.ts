@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateTypeDto } from '../dto/create-type.dto';
 import { UpdateTypeDto } from '../dto/update-type.dto';
 import { TypeEntity } from '../entities/type.entity';
