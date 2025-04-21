@@ -95,7 +95,15 @@ export class PokemonService {
 
     public async remove(id: string) {
         const pokemon = await this.findOne(id);
+        
+        if (pokemon.trainer) {
+            throw new BadRequestException(
+                `Pokemon with id ${id} is captured by a trainer and must be released before deletion.`
+            );
+        }
+
         await this.pokemonRepository.remove(pokemon);
+        return { message: `Pokemon with id ${id} has been deleted.` };
     }
 
     public async capture(id: string, caputurePokemonDto: CapturePokemonDto) {
@@ -114,5 +122,23 @@ export class PokemonService {
         } catch (error) {
             handlerError(error, this.logger);
         } 
+    }
+
+    public async release(id: string) {
+        try {
+            const pokemon = await this.findOne(id);
+    
+            if (!pokemon.trainer) {
+                return { message: `Pokemon with id ${id} is already wild.` };
+            }
+    
+            pokemon.trainer = null;
+            await this.pokemonRepository.save(pokemon);
+    
+            return { message: `Pokemon with id ${id} has been released.` };
+        } catch (error) {
+            handlerError(error, this.logger);
+            throw error;
+        }
     }
 }

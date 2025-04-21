@@ -18,7 +18,7 @@ export class PokemonEntity extends BaseEntity {
   
     @ManyToOne(() => TrainerEntity, { nullable: true, eager: true })
     @JoinColumn({ name: 'trainer_id' })
-    trainer?: TrainerEntity;
+    trainer: TrainerEntity | null;
 
     @Column({ type: 'int', nullable: false })
     attack: number;
