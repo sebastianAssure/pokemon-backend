@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PokemonEntity } from '../entities/pokemon.entity';
 import { Repository } from 'typeorm';
@@ -8,6 +8,7 @@ import { UpdatePokemonDto } from '../dto/update-pokemon.dto';
 import { TypeService } from './type.service';
 import { TrainersService } from 'src/trainers/services/trainers.service';
 import { TrainerEntity } from 'src/trainers/entities/trainer.entity';
+import { CapturePokemonDto } from '../dto/capture-pokemon.dto';
 
 @Injectable()
 export class PokemonService {
@@ -47,9 +48,21 @@ export class PokemonService {
     }
 
 
-    public async findAll() {
+    public async findAll(typeName?: string, wild?: boolean) {
         try {
-            const pokemons = await this.pokemonRepository.find();
+            const queryBuilder = this.pokemonRepository.createQueryBuilder('pokemon')
+                .leftJoinAndSelect('pokemon.type', 'type')
+                .leftJoinAndSelect('pokemon.trainer', 'trainer');
+    
+            if (typeName) {
+                queryBuilder.where('LOWER(type.name) = LOWER(:typeName)', { typeName });
+            }
+
+            if (wild === true) {
+                queryBuilder.andWhere('pokemon.trainer IS NULL');
+            }
+    
+            const pokemons = await queryBuilder.getMany();
             return pokemons;
         } catch (error) {
             handlerError(error, this.logger);
@@ -86,5 +99,23 @@ export class PokemonService {
     public async remove(id: string) {
         const pokemon = await this.findOne(id);
         await this.pokemonRepository.remove(pokemon);
+    }
+
+    public async capture(id: string, caputurePokemonDto: CapturePokemonDto) {
+        try {
+            const pokemon = await this.findOne(id);
+
+        if(pokemon.trainer) {
+            throw new BadRequestException(`Pokemon with ${id} already has trainer`);
+        }
+
+        const trainer = await this.trainerService.findOne(caputurePokemonDto.trainerId);
+
+        pokemon.trainer = trainer;
+
+        return await this.pokemonRepository.save(pokemon);
+        } catch (error) {
+            handlerError(error, this.logger);
+        } 
     }
 }
