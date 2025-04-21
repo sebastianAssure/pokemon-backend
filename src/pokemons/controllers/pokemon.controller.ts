@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, Query } from '@nestjs/common';
 import { PokemonService } from '../services/pokemon.service';
 import { CreatePokemonDto } from '../dto/create-pokemon.dto';
-import { UpdatePokemonDto } from '../dto/update-pokemon.dto';
+import { UpdateLevelPokemonDto } from '../dto/update-level-pokemon.dto';
 import { CapturePokemonDto } from '../dto/capture-pokemon.dto';
 
 @Controller('pokemons')
@@ -24,7 +24,7 @@ export class PokemonController {
     }
 
     @Patch(':id')
-    update(@Param('id', ParseUUIDPipe) id: string, @Body() updateTypeDto: UpdatePokemonDto) {
+    update(@Param('id', ParseUUIDPipe) id: string, @Body() updateTypeDto: UpdateLevelPokemonDto) {
         return this.pokemonService.update(id, updateTypeDto);
     }
 

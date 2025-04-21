@@ -7,7 +7,6 @@ import { handlerError } from 'src/common/utils/handler-error.utils';
 import { UpdatePokemonDto } from '../dto/update-pokemon.dto';
 import { TypeService } from './type.service';
 import { TrainersService } from 'src/trainers/services/trainers.service';
-import { TrainerEntity } from 'src/trainers/entities/trainer.entity';
 import { CapturePokemonDto } from '../dto/capture-pokemon.dto';
 
 @Injectable()
@@ -21,23 +20,17 @@ export class PokemonService {
 
         private readonly typeService: TypeService,
         private readonly trainerService: TrainersService,
-    ) { }
+    ) {}
 
     public async create(createPokemonDto: CreatePokemonDto) {
         try {
-            const { typeId, trainerId, ...pokemonData } = createPokemonDto;
+            const { typeId, ...pokemonData } = createPokemonDto;
 
             const type = await this.typeService.findOne(typeId);
 
-            let trainer: TrainerEntity | undefined;
-            if (trainerId) {
-                trainer = await this.trainerService.findOne(trainerId);
-            }
-
             const pokemon = this.pokemonRepository.create({
                 ...pokemonData,
-                type,
-                ...(trainer && { trainer }),
+                type
             });
 
             return await this.pokemonRepository.save(pokemon);
@@ -81,9 +74,13 @@ export class PokemonService {
     }
 
     public async update(id: string, updatePokemonDto: UpdatePokemonDto) {
+        const { level } = updatePokemonDto;
+
+        if (!level) throw new BadRequestException('Only level can be updated');
+
         const pokemon = await this.pokemonRepository.preload({
             id: id,
-            ...updatePokemonDto
+            level
         });
 
         if (!pokemon) throw new NotFoundException(`Pokemon with id ${id} not found`);
