@@ -68,4 +68,21 @@ export class TrainersService {
     const type = await this.findOne(id);
     await this.trainerRepository.remove(type);
   }
+
+  public async getMyPokemons(trainerId: string) {
+    try {
+      const trainer = await this.trainerRepository.findOne({
+        where: { id: trainerId },
+        relations: ['pokemons', 'pokemons.type'],
+      });
+
+      if (!trainer) {
+        throw new NotFoundException(`Trainer with id ${trainerId} not found`);
+      }
+      
+      return trainer.pokemons;
+    } catch (error) {
+      handlerError(error, this.logger);
+    }
+  }
 }

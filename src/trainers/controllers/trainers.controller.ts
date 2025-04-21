@@ -31,4 +31,9 @@ export class TrainersController {
   remove(@Param('id') id: string) {
     return this.trainersService.remove(id);
   }
+
+  @Get(':id/pokemons')
+  getMyPokemons(@Param('id') id: string) {
+    return this.trainersService.getMyPokemons(id);
+  }
 }
