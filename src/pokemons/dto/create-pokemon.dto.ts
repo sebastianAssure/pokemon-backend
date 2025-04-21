@@ -12,10 +12,6 @@ export class CreatePokemonDto {
   @IsUUID()
   typeId: string;
 
-  @IsUUID()
-  @IsOptional()
-  trainerId?: string;
-
   @IsInt()
   attack: number;
 

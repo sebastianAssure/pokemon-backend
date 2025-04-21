@@ -6,7 +6,7 @@ import { TypeEntity } from './type.entity';
 @Check(`"level" >= 1 AND "level" <= 100`)
 @Entity({ name: 'pokemons' })
 export class PokemonEntity extends BaseEntity {
-    @Column({ type: 'varchar', nullable: false })
+    @Column({ type: 'varchar', nullable: false, unique: true })
     name: string;
 
     @Column({ type: 'int', nullable: false })
