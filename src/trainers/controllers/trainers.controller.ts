@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TrainersService } from '../services/trainers.service';
 import { CreateTrainerDto } from '../dto/create-trainer.dto';
 import { UpdateTrainerDto } from '../dto/update-trainer.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Trainers')
 @Controller('trainers')
 export class TrainersController {
   constructor(private readonly trainersService: TrainersService) {}
