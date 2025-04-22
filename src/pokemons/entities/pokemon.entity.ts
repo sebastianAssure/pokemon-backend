@@ -1,5 +1,5 @@
-import { BaseEntity } from 'src/common/entities/base.entity';
-import { TrainerEntity } from 'src/trainers/entities/trainer.entity';
+import { BaseEntity } from '../../common/entities/base.entity';
+import { TrainerEntity } from '../../trainers/entities/trainer.entity';
 import { Check, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { TypeEntity } from './type.entity';
 

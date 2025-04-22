@@ -3,10 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PokemonEntity } from '../entities/pokemon.entity';
 import { Repository } from 'typeorm';
 import { CreatePokemonDto } from '../dto/create-pokemon.dto';
-import { handlerError } from 'src/common/utils/handler-error.utils';
+import { handlerError } from '../../common/utils/handler-error.utils';
 import { UpdatePokemonDto } from '../dto/update-pokemon.dto';
 import { TypeService } from './type.service';
-import { TrainersService } from 'src/trainers/services/trainers.service';
+import { TrainersService } from '../../trainers/services/trainers.service';
 import { CapturePokemonDto } from '../dto/capture-pokemon.dto';
 
 @Injectable()

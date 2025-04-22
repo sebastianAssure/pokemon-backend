@@ -4,7 +4,7 @@ import { UpdateTypeDto } from '../dto/update-type.dto';
 import { TypeEntity } from '../entities/type.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { handlerError } from 'src/common/utils/handler-error.utils';
+import { handlerError } from '../../common/utils/handler-error.utils';
 
 @Injectable()
 export class TypeService {

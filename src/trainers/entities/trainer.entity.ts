@@ -1,5 +1,5 @@
-import { BaseEntity } from 'src/common/entities/base.entity';
-import { PokemonEntity } from 'src/pokemons/entities/pokemon.entity';
+import { BaseEntity } from '../../common/entities/base.entity';
+import { PokemonEntity } from '../../pokemons/entities/pokemon.entity';
 import { Check, Column, Entity, OneToMany } from 'typeorm';
 
 @Check(`"age" >= 10 AND "age" <= 120`)

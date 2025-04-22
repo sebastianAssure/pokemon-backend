@@ -4,7 +4,7 @@ import { UpdateTrainerDto } from '../dto/update-trainer.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TrainerEntity } from '../entities/trainer.entity';
-import { handlerError } from 'src/common/utils/handler-error.utils';
+import { handlerError } from '../../common/utils/handler-error.utils';
 
 @Injectable()
 export class TrainersService {
