@@ -51,7 +51,7 @@ export class PokemonService {
                 queryBuilder.where('LOWER(type.name) = LOWER(:typeName)', { typeName });
             }
 
-            if (wild === true) {
+            if (wild) {
                 queryBuilder.andWhere('pokemon.trainer IS NULL');
             }
     
