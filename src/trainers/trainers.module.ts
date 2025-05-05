@@ -3,6 +3,7 @@ import { TrainersService } from './services/trainers.service';
 import { TrainersController } from './controllers/trainers.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TrainerEntity } from './entities/trainer.entity';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   controllers: [TrainersController],
@@ -10,7 +11,8 @@ import { TrainerEntity } from './entities/trainer.entity';
   imports: [
     TypeOrmModule.forFeature([
       TrainerEntity
-    ])
+    ]),
+    UsersModule
   ],
   exports: [TrainersService]
 })

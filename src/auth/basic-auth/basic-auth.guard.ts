@@ -1,4 +1,3 @@
-// src/auth/basic-auth.guard.ts
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
 import { UsersService } from '../../users/services/users.service';

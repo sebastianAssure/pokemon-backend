@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { TypeService } from '../services/type.service';
 import { CreateTypeDto } from '../dto/create-type.dto';
 import { UpdateTypeDto } from '../dto/update-type.dto';
 import { ApiTags, ApiOperation, ApiParam, ApiBody } from '@nestjs/swagger';
+import { BasicAuthGuard } from '../../auth/basic-auth/basic-auth.guard';
 
 @ApiTags('Types')
 @Controller('types')
@@ -16,6 +17,7 @@ export class TypeController {
     return this.typeService.create(createTypeDto);
   }
 
+  @UseGuards(BasicAuthGuard)
   @Get()
   @ApiOperation({ summary: 'Listar todos los tipos de Pokémon' })
   findAll() {

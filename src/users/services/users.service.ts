@@ -4,7 +4,7 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { Repository } from 'typeorm';
-import { handlerError } from 'src/common/utils/handler-error.utils';
+import { handlerError } from '../../common/utils/handler-error.utils';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()

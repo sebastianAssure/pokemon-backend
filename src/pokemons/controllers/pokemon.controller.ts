@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, Query, HttpCode } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, Query, HttpCode, UseGuards } from '@nestjs/common';
 import { PokemonService } from '../services/pokemon.service';
 import { CreatePokemonDto } from '../dto/create-pokemon.dto';
 import { UpdateLevelPokemonDto } from '../dto/update-level-pokemon.dto';
 import { CapturePokemonDto } from '../dto/capture-pokemon.dto';
 import { ApiTags, ApiOperation, ApiQuery, ApiParam, ApiBody } from '@nestjs/swagger';
+import { BasicAuthGuard } from '../../auth/basic-auth/basic-auth.guard';
 
 @ApiTags('Pokemons')
 @Controller('pokemons')
@@ -17,6 +18,7 @@ export class PokemonController {
         return this.pokemonService.create(createPokemonDto);
     }
 
+    @UseGuards(BasicAuthGuard)
     @Get()
     @ApiOperation({ summary: 'Listar todos los Pokémon (con filtros opcionales)' })
     @ApiQuery({ name: 'type', required: false, description: 'Filtrar por tipo (ej: fire)' })
