@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package type;
+
+service TypeService {
+  rpc CreateType (CreateTypeRequest) returns (TypeResponse);
+  rpc GetType (GetTypeRequest) returns (TypeResponse);
+  rpc UpdateType (UpdateTypeRequest) returns (TypeResponse);
+  rpc DeleteType (DeleteTypeRequest) returns (DeleteTypeResponse);
+  rpc ListTypes (Empty) returns (TypeListResponse);
+}
+
+message CreateTypeRequest {
+  string name = 1;
+}
+
+message GetTypeRequest {
+  string id = 1;
+}
+
+message UpdateTypeRequest {
+  string id = 1;
+  string name = 2;
+}
+
+message DeleteTypeRequest {
+  string id = 1;
+}
+
+message TypeResponse {
+  string id = 1;
+  string name = 2;
+}
+
+message DeleteTypeResponse {
+  bool success = 1;
+}
+
+message TypeListResponse {
+  repeated TypeResponse types = 1;
+}
+
+message Empty {}

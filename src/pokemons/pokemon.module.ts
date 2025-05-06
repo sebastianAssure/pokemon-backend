@@ -6,7 +6,6 @@ import { TypeEntity } from './entities/type.entity';
 import { PokemonEntity } from './entities/pokemon.entity';
 import { PokemonController } from './controllers/pokemon.controller';
 import { PokemonService } from './services/pokemon.service';
-import { TrainersService } from 'src/trainers/services/trainers.service';
 import { TrainersModule } from 'src/trainers/trainers.module';
 
 @Module({
@@ -15,6 +14,7 @@ import { TrainersModule } from 'src/trainers/trainers.module';
   imports: [
     TypeOrmModule.forFeature([TypeEntity, PokemonEntity]),
     TrainersModule
-  ]
+  ],
+  exports: [TypeService]
 })
 export class PokemonModule {}
