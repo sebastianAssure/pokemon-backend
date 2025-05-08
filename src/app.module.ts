@@ -26,7 +26,7 @@ import { join } from 'path';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       path: '/graphql',
-      sortSchema: true
+      sortSchema: true,
     }),
 
     PokemonModule,

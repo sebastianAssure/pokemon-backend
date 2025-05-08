@@ -10,7 +10,7 @@ export class CreatePokemonInputDto {
   @Field(() => Int)
   @IsInt()
   @Min(1, { message: 'Level must be at least 1' })
-  @Max(10, { message: 'Level must be at most 100' })
+  @Max(100, { message: 'Level must be at most 100' })
   level: number;
 
   @Field(() => Int)
