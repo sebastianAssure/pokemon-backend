@@ -1,0 +1,109 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CapturePokemonInputDto {
+  trainerId: ID!
+}
+
+input CreatePokemonInputDto {
+  attack: Int!
+  defense: Int!
+  isLegendary: Boolean!
+  level: Int!
+  name: String!
+  speed: Int!
+  typeId: ID!
+}
+
+input CreateTrainerInputDto {
+  age: Float!
+  badges: Float!
+  name: String!
+  region: String!
+  secondName: String!
+}
+
+input CreateTypeInputDto {
+  name: String!
+}
+
+type MessageResponseModel {
+  message: String!
+}
+
+type Mutation {
+  capturePokemon(capturePokemonInput: CapturePokemonInputDto!, id: String!): PokemonModel!
+  createPokemon(createPokemonInput: CreatePokemonInputDto!): PokemonModel!
+  createTrainer(createTrainerInput: CreateTrainerInputDto!): TrainerModel!
+  createType(createTypeInput: CreateTypeInputDto!): TypeModel!
+  levelUpPokemon(id: String!): MessageResponseModel!
+  releasePokemon(id: String!): MessageResponseModel!
+  removePokemon(id: String!): MessageResponseModel!
+  removeTrainer(id: String!): TrainerModel!
+  removeType(id: String!): MessageResponseModel!
+  updatePokemon(updatePokemonInput: UpdatePokemonInputDto!): PokemonModel!
+  updateTrainer(updateTrainerInput: UpdateTrainerInputDto!): TrainerModel!
+  updateType(updateTypeInput: UpdateTypeInputDto!): TypeModel!
+}
+
+type PokemonModel {
+  attack: Int!
+  defense: Int!
+  id: ID!
+  isLegendary: Boolean!
+  level: Int!
+  name: String!
+  speed: Int!
+  trainer: TrainerModel
+  type: TypeModel!
+}
+
+type Query {
+  getMyPokemons(id: String!): [PokemonModel!]!
+  pokemon(id: String!): PokemonModel!
+  pokemons: [PokemonModel!]!
+  trainer(id: String!): TrainerModel!
+  trainers: [TrainerModel!]!
+  type(id: String!): TypeModel!
+  types: [TypeModel!]!
+}
+
+type TrainerModel {
+  age: Int!
+  badges: Int!
+  id: ID!
+  name: String!
+  region: String!
+  secondName: String!
+}
+
+type TypeModel {
+  id: ID!
+  name: String!
+}
+
+input UpdatePokemonInputDto {
+  attack: Int
+  defense: Int
+  id: ID!
+  isLegendary: Boolean
+  level: Int
+  name: String
+  speed: Int
+  typeId: ID
+}
+
+input UpdateTrainerInputDto {
+  age: Float
+  badges: Float
+  id: ID!
+  name: String
+  region: String
+  secondName: String
+}
+
+input UpdateTypeInputDto {
+  id: ID!
+  name: String
+}

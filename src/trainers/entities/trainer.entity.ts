@@ -17,7 +17,7 @@ export class TrainerEntity extends BaseEntity {
     @Column({ type: 'varchar' })
     region: string;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'int', default: 0 })
     badges: number;
 
     @OneToMany(() => PokemonEntity, (pokemon) => pokemon.trainer)

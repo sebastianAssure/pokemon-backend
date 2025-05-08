@@ -65,7 +65,14 @@ export class TypeService {
   }
 
   public async remove(id: string) {
-    const type = await this.findOne(id);
-    await this.typeRepository.remove(type);
+    try {
+      const type = await this.findOne(id);
+      await this.typeRepository.remove(type);
+
+      return { message: `Type with id ${id} has been deleted.` }
+    } catch (error) {
+      handlerError(error, this.logger);
+    }
+    
   }
 }

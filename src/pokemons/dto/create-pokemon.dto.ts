@@ -8,8 +8,8 @@ export class CreatePokemonDto {
 
   @ApiProperty({ example: 12, minimum: 1, maximum: 100, description: 'Nivel del Pokémon (1-100)' })
   @IsInt()
-  @Min(1)
-  @Max(100)
+  @Min(1, { message: 'Level must be at least 1' })
+  @Max(10, { message: 'Level must be at most 100' })
   level: number;
 
   @ApiProperty({ example: 'c3a9b87f-1122-4db0-a7b1-e2f234fa7909', description: 'UUID del tipo de Pokémon' })

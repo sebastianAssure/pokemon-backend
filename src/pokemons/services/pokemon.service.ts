@@ -160,7 +160,6 @@ export class PokemonService {
       
           return {
             message: `Pokemon with id ${id} leveled up to ${pokemon.level}.`,
-            level: pokemon.level
           };
         } catch (error) {
           handlerError(error, this.logger);
