@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: pokemon
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - nestnet
+
+  backend:
+    build: .
+    container_name: nest_backend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: admin
+      DB_NAME: pokemon
+    networks:
+      - nestnet
+
+volumes:
+  postgres_data:
+
+networks:
+  nestnet:
